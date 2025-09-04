@@ -16,21 +16,94 @@ When you click the **Knit** button a document will be generated that includes bo
 
 ```{r cars}
 
-#Loaded in the tidyverse package
+#Step 1 - Loaded in the tidyverse package
 library("tidyverse")
 
 #Reading in csv file to a variable
 socialMedia <- read.csv("socialMediaAddiction.csv")
 
+#Glimpse into the data set
+glimpse(socialMedia)
+
+#Creating a histogram with two quantitative variables using ggplot
+
+socialMedia %>%
+  ggplot(mapping = aes(x = Age)) +
+  geom_histogram()
+  
+socialMedia %>%
+  ggplot(mapping = aes(y = Mental_Health_Score)) +
+  geom_histogram()
+
+
+
 summary(cars)
 ```
+## Step 5 - The distribution of the Age of the data set that uses social media is most similar with a gaussian distribition because there are  lower amounts near the extremes but a greater count near the middle of the data set. A hypothesis for this positive skew is that there are fewer higher age groups using social medias because social media is commonly seen in teenagers as they are using their phones more due to not having jobs and are able to spend more free time on their phones.
+
+## Step 5 - The distribution of the Mental Health Score is similar to the age curve and follows a gaussian distribution with less count near the extremes.A hypothesis for this distribution is that most mental health in a given survey of a sample in America are near the middle of the mental health score because the quality of life and resources available to children have increased in the upcoming years
+
+
+
+
 
 ## Including Plots
 
 You can also embed plots, for example:
 
 ```{r pressure, echo=FALSE}
+
+#Code chunk for Step 7 to graph Step 6
+
+socialMedia %>%
+  ggplot(mapping = aes(x = Avg_Daily_Usage_Hours, y = Sleep_Hours_Per_Night )) +
+  geom_point()
+
+
+
 plot(pressure)
+
+glimpse(socialMedia)
 ```
+
+## Step 8 - There is a negative relationship seen between Avg Daily usage hours and Sleep hours per night, the higher usage of social media correlates with a lower amount of hours slept per night. As seen in the figure there is a negative correlation as there is an increase in daily usage hours there is a decrease in the amount of hours slept.
+
+## Step 9 - To visualize this type of graph I might use a box plot to categorize the different categories of social media apps and map that as the X variable. This is because there are categorical and continous variables which would be easy to quantify in a box plot that shows the difference between the different categories. I will also map the Y variable with the longer use times to show the relationships between the two variables.
+
+```{r}
+# Step 10 to code what I proposed in step 7
+
+socialMedia %>%
+  ggplot(mapping = aes(x = Most_Used_Platform, y = Avg_Daily_Usage_Hours )) +
+  geom_boxplot()
+
+glimpse(socialMedia)
+```
+## Step 11- Texting based apps like whatsapp and weChat generally have a higher usage of hours and addiction when comparing medians as an average indicator compared to other social media apps.
+
+## Step 12 - Does the relationship between Amount of Average daily usage hours on the phone and conflicts over social media vary per student gender?
+
+## Step 13 - I would probably use a scatter plot to graph this relationship, The x axis would include the amount of average daily usage hours on the phone and the y axis would include the amount of conflicts over social media. I would set a color variable to equal the gender to differentiate between male and female for each of the data points. I would then be able to use the color to distinguish the relationships between the two genders by each of the data points.
+
+```{r}
+#Step 14 - Code for step 12
+socialMedia %>%
+  ggplot(mapping = aes(x = Avg_Daily_Usage_Hours, y = Conflicts_Over_Social_Media, color = Gender)) +
+  geom_point()
+
+  
+```
+##Step 15 - According to the scatter plot the higher amount of average daily usage hours for females indicates a higher amount of conflicts than males. For males who spend less hours on their phone there are on average less conflicts compared to females.
+
+## Next Step - I will utilize the same question as the previous steps: Does the relationship between Amount of Average daily usage hours on the phone and conflicts over social media vary per student gender?
+
+```{r}
+socialMedia %>%
+  ggplot(mapping = aes(x = Avg_Daily_Usage_Hours, y = Conflicts_Over_Social_Media, color = Gender)) +
+  geom_count()
+```
+
+## Next Step - According to the count plot there is actually a greater count of males that have 3 or more conflicts after 4 or more average daily usage hours than females. There are a few females with more conflicts with more average daily usage hours however the n count of each of these points are lower than males with similarly less hours and less conflicts. This goes to show how a scatter plot may not be fully representative of the whole data set and more geometries can be used.
+
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
